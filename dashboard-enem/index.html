@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard ENEM</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="logo-icon">📊</span>
+                    <h1>Dashboard ENEM</h1>
+                </div>
+            </div>
+            <div class="sidebar-nav">
+                <ul>
+                    <li><a href="#" class="nav-link active" data-section="overview">📈 Visão Geral</a></li>
+                    <li><a href="#" class="nav-link" data-section="media-estado">🗺️ Média por Estado</a></li>
+                    <li><a href="#" class="nav-link" data-section="media-municipio-rj">🏙️ Municípios do RJ</a></li>
+                    <li><a href="#" class="nav-link" data-section="media-sexo">👥 Média por Sexo</a></li>
+                    <li><a href="#" class="nav-link" data-section="media-cor-raca">🎨 Média por Cor/Raça</a></li>
+                    <li><a href="#" class="nav-link" data-section="media-tipo-escola">🏫 Tipo de Escola</a></li>
+                    <li><a href="#" class="nav-link" data-section="media-faixa-etaria">📅 Faixa Etária</a></li>
+                    <li><a href="#" class="nav-link" data-section="participantes-nota">📋 Notas por Participante</a>
+                    </li>
+                    <li><a href="#" class="nav-link" data-section="maior-nota-estado">🏆 Maior/Menor Nota</a></li>
+                    <li><a href="#" class="nav-link" data-section="media-regiao">🌍 Média por Região</a></li>
+                    <li><a href="#" class="nav-link" data-section="maior-media-disciplina-estado">📚 Melhor
+                            Disciplina</a></li>
+                    <li><a href="#" class="nav-link" data-section="media-disciplina-uf">📊 Disciplinas por UF</a></li>
+                    <li><a href="#" class="nav-link" data-section="conteudos-mais-errados">❌ Conteúdos Mais Errados</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <section id="overview" class="content-section active">
+                <div class="section-header">
+                    <h2>Dashboard ENEM - Visão Geral</h2>
+                    <p>Análise abrangente do desempenho dos participantes do ENEM</p>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Bem-vindo ao Dashboard ENEM</h3>
+                        </div>
+                        <p>Utilize a navegação lateral para explorar os diferentes aspectos dos dados do ENEM.</p>
+                        <ul>
+                            <li>📊 Análise por estados e regiões</li>
+                            <li>👥 Perfil demográfico dos participantes</li>
+                            <li>🏫 Comparação entre tipos de escola</li>
+                            <li>📚 Desempenho por disciplina</li>
+                            <li>❌ Conteúdos com maior dificuldade</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section id="media-estado" class="content-section">
+                <div class="section-header">
+                    <h2>Média por Estado</h2>
+                    <p>Desempenho médio dos participantes por unidade federativa</p>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Gráfico - Média por Estado</h3>
+                            <button class="refresh-btn" onclick="refreshChart('media-estado-chart')">🔄</button>
+                        </div>
+                        <canvas id="media-estado-chart"></canvas>
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Tabela - Média por Estado</h3>
+                        <button class="refresh-btn" onclick="refreshTable('media-estado-table')">🔄</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Estado (UF)</th>
+                                    <th>Média Geral</th>
+                                </tr>
+                            </thead>
+                            <tbody id="media-estado-tbody">
+                                <tr>
+                                    <td colspan="2">Carregando dados...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <section id="media-municipio-rj" class="content-section">
+                <div class="section-header">
+                    <h2>Municípios do Rio de Janeiro</h2>
+                    <p>Desempenho dos municípios fluminenses no ENEM</p>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Gráfico - Top 15 Municípios RJ</h3>
+                            <button class="refresh-btn" onclick="refreshChart('media-municipio-rj-chart')">🔄</button>
+                        </div>
+                        <canvas id="media-municipio-rj-chart"></canvas>
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Tabela - Municípios do RJ</h3>
+                        <button class="refresh-btn" onclick="refreshTable('media-municipio-rj-table')">🔄</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Município</th>
+                                    <th>Média</th>
+                                </tr>
+                            </thead>
+                            <tbody id="media-municipio-rj-tbody">
+                                <tr>
+                                    <td colspan="2">Carregando dados...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <section id="media-sexo" class="content-section">
+                <div class="section-header">
+                    <h2>Média por Sexo</h2>
+                    <p>Comparação de desempenho entre gêneros por disciplina</p>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Gráfico - Média por Sexo</h3>
+                            <button class="refresh-btn" onclick="refreshChart('media-sexo-chart')">🔄</button>
+                        </div>
+                        <canvas id="media-sexo-chart"></canvas>
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Tabela - Média por Sexo e Disciplina</h3>
+                        <button class="refresh-btn" onclick="refreshTable('media-sexo-table')">🔄</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Sexo</th>
+                                    <th>Média Geral</th>
+                                    <th>Ciências Humanas</th>
+                                    <th>Linguagens e Códigos</th>
+                                    <th>Matemática</th>
+                                    <th>Ciências da Natureza</th>
+                                </tr>
+                            </thead>
+                            <tbody id="media-sexo-tbody">
+                                <tr>
+                                    <td colspan="6">Carregando dados...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <section id="media-cor-raca" class="content-section">
+                <div class="section-header">
+                    <h2>Média por Cor/Raça</h2>
+                    <p>Análise do desempenho por autodeclaração racial</p>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Gráfico - Média por Cor/Raça</h3>
+
+                            <button class="refresh-btn" onclick="refreshChart('media-cor-raca-chart')">🔄</button>
+                        </div>
+                        <canvas id="media-cor-raca-chart"></canvas>
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Tabela - Média por Cor/Raça e Disciplina</h3>
+                        <button class="refresh-btn" onclick="refreshTable('media-cor-raca-table')">🔄</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Cor/Raça</th>
+                                    <th>Média Geral</th>
+                                    <th>Ciências Humanas</th>
+                                    <th>Linguagens e Códigos</th>
+                                    <th>Matemática</th>
+                                    <th>Ciências da Natureza</th>
+                                </tr>
+                            </thead>
+                            <tbody id="media-cor-raca-tbody">
+                                <tr>
+                                    <td colspan="6">Carregando dados...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <section id="media-tipo-escola" class="content-section">
+                <div class="section-header">
+                    <h2>Média por Tipo de Escola</h2>
+                    <p>Comparação entre escolas públicas e privadas</p>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Gráfico - Média por Tipo de Escola</h3>
+                            <button class="refresh-btn" onclick="refreshChart('media-tipo-escola-chart')">🔄</button>
+                        </div>
+                        <canvas id="media-tipo-escola-chart"></canvas>
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Tabela - Média por Tipo de Escola e Disciplina</h3>
+                        <button class="refresh-btn" onclick="refreshTable('media-tipo-escola-table')">🔄</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Tipo de Escola</th>
+                                    <th>Média Geral</th>
+                                    <th>Ciências Humanas</th>
+                                    <th>Linguagens e Códigos</th>
+                                    <th>Matemática</th>
+                                    <th>Ciências da Natureza</th>
+                                </tr>
+                            </thead>
+                            <tbody id="media-tipo-escola-tbody">
+                                <tr>
+                                    <td colspan="6">Carregando dados...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <section id="media-faixa-etaria" class="content-section">
+                <div class="section-header">
+                    <h2>Média por Faixa Etária</h2>
+                    <p>Desempenho por idade dos participantes</p>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Gráfico - Média por Faixa Etária</h3>
+                            <button class="refresh-btn" onclick="refreshChart('media-faixa-etaria-chart')">🔄</button>
+                        </div>
+                        <canvas id="media-faixa-etaria-chart"></canvas>
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Tabela - Média por Faixa Etária e Disciplina</h3>
+                        <button class="refresh-btn" onclick="refreshTable('media-faixa-etaria-table')">🔄</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Faixa Etária</th>
+                                    <th>Média Geral</th>
+                                    <th>Ciências Humanas</th>
+                                    <th>Linguagens e Códigos</th>
+                                    <th>Matemática</th>
+                                    <th>Ciências da Natureza</th>
+                                </tr>
+                            </thead>
+                            <tbody id="media-faixa-etaria-tbody">
+                                <tr>
+                                    <td colspan="6">Carregando dados...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Tabela - Legenda</h3>
+                        <button class="refresh-btn" onclick="refreshTable('media-faixa-etaria-table')">🔄</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td colspan="6">1</td>
+                                    <td colspan="6">'Menor de 17 anos'</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">2</td>
+                                    <td colspan="6">'17 anos'</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">3</td>
+                                    <td colspan="6">'18 anos'</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">4</td>
+                                    <td colspan="6">'19 anos'</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">5</td>
+                                    <td colspan="6">'20 anos'</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">6</td>
+                                    <td colspan="6">'21 anos'</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">7</td>
+                                    <td colspan="6">'22 anos'</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">8</td>
+                                    <td colspan="6">'23 anos'</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">9</td>
+                                    <td colspan="6">'24 anos'</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">10</td>
+                                    <td colspan="6">'25 anos'</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">11</td>
+                                    <td colspan="6">'Entre 26 e 30 anos'</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">12</td>
+                                    <td colspan="6">'Entre 31 e 35 anos'</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">13</td>
+                                    <td colspan="6">'Entre 36 e 40 anos'</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">14</td>
+                                    <td colspan="6">'Entre 41 e 45 anos'</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">15</td>
+                                    <td colspan="6">'Entre 46 e 50 anos'</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">16</td>
+                                    <td colspan="6">'Entre 51 e 55 anos'</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">17</td>
+                                    <td colspan="6">'Entre 56 e 60 anos'</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">18</td>
+                                    <td colspan="6">'Entre 61 e 65 anos'</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">19</td>
+                                    <td colspan="6">'Entre 66 e 70 anos'</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">20</td>
+                                    <td colspan="6">'Maior de 70 anos'</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <section id="participantes-nota" class="content-section">
+                <div class="section-header">
+                    <h2>Notas por Participante</h2>
+                    <p>Notas individuais dos participantes por disciplina</p>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Tabela - Notas por Participante</h3>
+                        <button class="refresh-btn" onclick="refreshTable('participantes-nota-table')">🔄</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID Participante</th>
+                                    <th>Ciências Humanas</th>
+                                    <th>Linguagens e Códigos</th>
+                                    <th>Matemática</th>
+                                    <th>Ciências da Natureza</th>
+                                </tr>
+                            </thead>
+                            <tbody id="participantes-nota-tbody">
+                                <tr>
+                                    <td colspan="5">Carregando dados...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <section id="maior-nota-estado" class="content-section">
+                <div class="section-header">
+                    <h2>Maior e Menor Nota por Estado</h2>
+                    <p>Extremos de desempenho por disciplina em cada estado</p>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Tabela - Extremos por Estado e Disciplina</h3>
+                        <button class="refresh-btn" onclick="refreshTable('maior-nota-estado-table')">🔄</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ranking</th>
+                                    <th>Estado</th>
+                                    <th>Máx C. Humanas</th>
+                                    <th>Máx Linguagens</th>
+                                    <th>Máx Matemática</th>
+                                    <th>Máx C. Natureza</th>
+                                    <th>Mín C. Humanas</th>
+                                    <th>Mín Linguagens</th>
+                                    <th>Mín Matemática</th>
+                                    <th>Mín C. Natureza</th>
+                                </tr>
+                            </thead>
+                            <tbody id="maior-nota-estado-tbody">
+                                <tr>
+                                    <td colspan="10">Carregando dados...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="media-regiao" class="content-section">
+                <div class="section-header">
+                    <h2>Média por Região</h2>
+                    <p>Desempenho por região geográfica do Brasil</p>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Gráfico - Média por Região</h3>
+                            <button class="refresh-btn" onclick="refreshChart('media-regiao-chart')">🔄</button>
+                        </div>
+                        <canvas id="media-regiao-chart"></canvas>
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Tabela - Média por Região e Disciplina</h3>
+                        <button class="refresh-btn" onclick="refreshTable('media-regiao-table')">🔄</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Região</th>
+                                    <th>Média Geral</th>
+                                    <th>Ciências Humanas</th>
+                                    <th>Linguagens e Códigos</th>
+                                    <th>Matemática</th>
+                                    <th>Ciências da Natureza</th>
+                                </tr>
+                            </thead>
+                            <tbody id="media-regiao-tbody">
+                                <tr>
+                                    <td colspan="6">Carregando dados...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="maior-media-disciplina-estado" class="content-section">
+                <div class="section-header">
+                    <h2>Disciplina com Melhor Média por Estado</h2>
+                    <p>Qual disciplina teve melhor desempenho em cada estado</p>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Tabela - Melhor Disciplina por Estado</h3>
+                        <button class="refresh-btn"
+                            onclick="refreshTable('maior-media-disciplina-estado-table')">🔄</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Estado</th>
+                                    <th>Disciplina</th>
+                                    <th>Média</th>
+                                </tr>
+                            </thead>
+                            <tbody id="maior-media-disciplina-estado-tbody">
+                                <tr>
+                                    <td colspan="3">Carregando dados...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="media-disciplina-uf" class="content-section">
+                <div class="section-header">
+                    <h2>Média das Disciplinas por UF</h2>
+                    <p>Comparação completa por estado e disciplina</p>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Tabela - Disciplinas por Estado</h3>
+                        <button class="refresh-btn" onclick="refreshTable('media-disciplina-uf-table')">🔄</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Estado</th>
+                                    <th>Ciências Humanas</th>
+                                    <th>Linguagens e Códigos</th>
+                                    <th>Matemática</th>
+                                    <th>Ciências da Natureza</th>
+                                    <th>Média Geral</th>
+                                </tr>
+                            </thead>
+                            <tbody id="media-disciplina-uf-tbody">
+                                <tr>
+                                    <td colspan="6">Carregando dados...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p>Carregando dados...</p>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>

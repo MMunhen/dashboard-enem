@@ -4,6 +4,17 @@ Dashboard acadêmico para visualização de indicadores relacionados ao desempen
 
 O projeto foi desenvolvido em grupo como trabalho acadêmico, para a disciplina de Banco de Dados, utilizando consultas SQL em banco MySQL, uma API em Flask e uma interface web com HTML, CSS e JavaScript.
 
+## Capturas de tela
+
+### Dashboard principal
+![Dashboard principal](assets/screenshots/dashboard.png)
+
+### Médias por município do RJ
+![Médias por município do RJ](assets/screenshots/municipios-rj.png)
+
+### Análise por faixa etária
+![Análise por faixa etária](assets/screenshots/faixa-etaria.png)
+
 ## Tecnologias
 
 - Python

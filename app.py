@@ -9,7 +9,7 @@ CORS(app)
 connection = pymysql.connect(
     host='localhost',
     user='root',
-    password='senha_do_mysql',
+    password='123456',
     database='desempenhoenem',
     port=3306,
     cursorclass=pymysql.cursors.DictCursor
